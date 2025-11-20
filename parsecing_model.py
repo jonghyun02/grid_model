@@ -48,18 +48,11 @@ def cluster_lines(lines, threshold=15):
     return [int(sum(c)/len(c)) for c in clusters]
 
 def extract_by_grid_lines(img, output_dir, debug=False):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    height, width = gray.shape
-    
-    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
-    edges = cv2.Canny(blurred, 50, 150, apertureSize=3)
-    
+    height, width = img.shape[:2]
+    edges = cv2.Canny(img, 50, 150, apertureSize=3)
     lines = cv2.HoughLinesP(edges, 1, np.pi/180, threshold=80, 
                             minLineLength=min(width, height)//5, maxLineGap=20)
-    
-    if lines is None:
-        return 0
-    
+
     h_lines = []
     v_lines = []
     
@@ -112,13 +105,11 @@ def extract_by_grid_lines(img, output_dir, debug=False):
     return count
 
 if __name__ == "__main__":
-    for i in range(0, 9):
+    for i in range(0, 10):
         f = f"test{i+1}.png"
         
         try:
             output = f"result_{f.split('.')[0]}"
             grid_extract(f, output_dir=output, debug=True)
         except Exception as e:
-
             print(f"[{f}] 처리 제외: {e}\n")
-
