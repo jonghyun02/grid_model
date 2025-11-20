@@ -112,7 +112,7 @@ def extract_by_grid_lines(img, output_dir, debug=False):
     return count
 
 if __name__ == "__main__":
-    for i in range(0, 7):
+    for i in range(0, 9):
         f = f"test{i+1}.png"
         
         try:
@@ -121,3 +121,4 @@ if __name__ == "__main__":
         except Exception as e:
 
             print(f"[{f}] 처리 제외: {e}\n")
+
