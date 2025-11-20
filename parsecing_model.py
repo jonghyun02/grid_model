@@ -98,7 +98,7 @@ def extract_by_grid_lines(img, output_dir, debug=False):
             ratio = get_black_ratio(roi)
             
             if ratio >= MIN_BLACK_RATIO:
-                output_path = f"{output_dir}/grid_{count:03d}.png"
+                output_path = f"{output_dir}/grid_{count:02d}.png"
                 cv2.imwrite(output_path, roi)
                 count += 1
                 
@@ -113,3 +113,4 @@ if __name__ == "__main__":
             grid_extract(f, output_dir=output, debug=True)
         except Exception as e:
             print(f"[{f}] 처리 제외: {e}\n")
+
